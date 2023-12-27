@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles.css';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeBookmark } from '../redux/actions/bookmarkActions';
 
 const BookmarksPage = () => {
