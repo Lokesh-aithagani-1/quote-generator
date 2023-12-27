@@ -13,13 +13,9 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    
     fetchRandomQuote();
-
-    
     fetchTags();
 
-    
     const savedBookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
     setBookmarks(savedBookmarks);
   }, []);
@@ -43,7 +39,6 @@ const HomePage = () => {
   };
 
   const handleGenerateQuote = () => {
-    
     fetchRandomQuote();
   };
 
@@ -52,10 +47,8 @@ const HomePage = () => {
   };
 
   const handleTagQuote = async () => {
-    
     try {
       const response = await axios.get(`https://api.quotable.io/random?tag=${selectedTag}`);
-      console.log('Tagged quote response:', response.data);
       setQuoteData(response.data);
     } catch (error) {
       console.error('Error fetching tagged quote:', error);
@@ -63,9 +56,11 @@ const HomePage = () => {
   };
 
   const handleBookmark = () => {
-    
     if (quoteData.content) {
       dispatch(addBookmark(quoteData));
+      const updatedBookmarks = [...bookmarks, quoteData];
+      setBookmarks(updatedBookmarks);
+      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
     }
   };
 
